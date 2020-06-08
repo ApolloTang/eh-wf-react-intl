@@ -5,17 +5,18 @@ import Spanish from 'translations/es-ES.json'
 import English from 'translations/en-US.json'
 import French from 'translations/fr-FR.json'
 
+type importMsgType = {
+  [k:string]:string
+}
 type localType = 'en-US'|'es-ES'|'fr-FR'
 
-const InitialLocale:localType = navigator.language || 'en-US';
+const InitialLocale = (navigator.language || 'en-US') as unknown as  localType
 
-type langType = typeof Spanish | typeof English | typeof French
-
-let lang:langType = English
+let initialMessage:importMsgType = English
 if (InitialLocale === 'es-ES') {
-  lang = Spanish
+  initialMessage = Spanish as importMsgType
 } else if (InitialLocale === 'fr-FR') {
-  lang = French
+  initialMessage = French as importMsgType
 }
 
 type LangContextType = {
@@ -30,10 +31,10 @@ const LangContext = React.createContext<LangContextType>({
 
 const Language = (props: {children: React.ReactNode}) => {
   const [locale, setLocale] = useState<localType>(InitialLocale)
-  const [message, setMessage] = useState<langType>(lang)
+  const [message, setMessage] = useState<importMsgType>(initialMessage)
 
   function selectLang(e: React.ChangeEvent<HTMLSelectElement>) {
-    const newLocale = e.target.value
+    const newLocale = e.target.value as localType
 
     setLocale(newLocale)
     if (newLocale === 'es-ES') {
