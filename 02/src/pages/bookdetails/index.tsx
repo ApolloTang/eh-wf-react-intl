@@ -1,15 +1,17 @@
 import React, {useContext} from 'react'
 import {meanBy, round, sortBy} from 'lodash'
-import {FormattedMessage, FormattedNumber} from 'react-intl'
+import {FormattedMessage, FormattedNumber, FormattedTime, FormattedRelativeTime} from 'react-intl'
 import {LangContext, LangContextType} from 'root/language/'
 import {useParams} from 'react-router-dom'
+import {selectUnit} from '@formatjs/intl-utils';
+
 
 import books from '../../books.json'
 type merchantType = {
   price: {
-    'en-US': number,
-    'es-ES': number,
-    'fr-FR': number,
+    'en-US': number
+    'es-ES': number
+    'fr-FR': number
   }
 }
 
@@ -19,7 +21,7 @@ interface ParamTypes {
 
 const Bookdetail = () => {
   const langContext = useContext(LangContext)
-  const locale = langContext.locale as 'en-US'|'es-ES'|'fr-FR'
+  const locale = langContext.locale as 'en-US' | 'es-ES' | 'fr-FR'
   const {bookId} = useParams<ParamTypes>()
 
   const book = books.find(book => book.id === parseInt(bookId, 10))
@@ -61,8 +63,8 @@ const Bookdetail = () => {
       </h3>
 
       <div className="BookDetail-merchants">
-        {book?.merchants.map((merchant) => {
-          const m = merchant as unknown as merchantType
+        {book?.merchants.map(merchant => {
+          const m = (merchant as unknown) as merchantType
           const priceLocale = m?.price?.[locale]
 
           return (
@@ -87,6 +89,66 @@ const Bookdetail = () => {
                 />
               </p>
             </a>
+          )
+        })}
+      </div>
+
+      <FormattedMessage
+        id="detail.window"
+        values={{numMerchants: book?.merchants.length}}
+        defaultMessage="number of merchants: {numMerchants}"
+      />
+
+      <h2>
+        <FormattedMessage
+          id="detail.reviewsHeading"
+          defaultMessage="review heading"
+        />
+      </h2>
+
+      <h3>
+        <FormattedMessage
+          id="detail.averageRating"
+          values={{avg: avgRating, count: book?.reviews?.length}}
+          defaultMessage="Ave Rating: {avgRating}, num of review: {count}"
+        />
+      </h3>
+
+      <div className="BookDetail-reviews">
+        {sortedReviews.map(review => {
+          const {value, unit} = selectUnit(Date.now()- new Date(review.date).getTime());
+
+          return (
+            <div className="Review" key={review.date}>
+              <div className="Review-meta">
+                <img src={review.avatar} alt="Avatar" />
+                <p>
+                  <FormattedMessage
+                    id="detail.userRating"
+                    values={{
+                      name: <strong>{review.name}</strong>,
+                      rating: review.rating,
+                    }}
+                  />
+                  <br />
+                  {/*<FormattedDate
+                  value={new Date(review.date)}
+                  year='2-digit'
+                  month='2-digit'
+                  day='2-digit' />*/}
+                  <FormattedTime
+                    value={new Date(review.date)}
+                    year="2-digit"
+                    month="2-digit"
+                    day="2-digit"
+                  />
+                  <br />
+                  <FormattedRelativeTime value={value} unit={unit} />
+                  <br />
+                </p>
+              </div>
+              <p>{review.body}</p>
+            </div>
           )
         })}
       </div>

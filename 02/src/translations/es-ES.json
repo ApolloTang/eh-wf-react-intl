@@ -3,8 +3,11 @@
   "app.content": "Learn React",
   "app.header": "Edit <my-tag>src/App.js</my-tag> js and save to reload.",
   "detail.author": "ES Author: {author}",
+  "detail.averageRating": "Ave Rating: {avgRating}, num of review: {count}",
   "detail.purchase": "ES Purchase this book from:",
+  "detail.reviewsHeading": "review heading",
   "detail.toggle": "ES Toggle",
+  "detail.window": "length: {value}",
   "pageb.channel.plug": "Video brought to you by Coding with Chaim",
   "pageb.content": "Learn React",
   "pageb.header": "Edit <my-tag>src/App.js</my-tag> js and save to reload."
