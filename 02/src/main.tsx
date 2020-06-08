@@ -20,22 +20,6 @@ console.log(
   process.env.ENABLE_REDUX_LOGGER,
 )
 
-
-const foo = <T, >( a:T, b:T) => {
-  console.log(b); return a
-}
-
-foo<string>('a', 'a');
-
-const getArray = <T,>(items: T[]): T[] => Array<T>().concat(items)
-
-const myNumArr = getArray<number>([100, 200, 300]);
-const myStrArr = getArray<string>(["Hello", "World"]);
-
-myNumArr.push(1)
-
-console.log(myNumArr)
-
 const runApp = () => {
   const appContainer = document.getElementById('app-container')
   ReactDom.render(<Root />, appContainer)
