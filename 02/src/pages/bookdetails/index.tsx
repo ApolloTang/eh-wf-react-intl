@@ -109,7 +109,7 @@ const Bookdetail = () => {
       <h3>
         <FormattedMessage
           id="detail.averageRating"
-          values={{avg: avgRating, count: book?.reviews?.length}}
+          values={{avgRating: avgRating, count: book?.reviews?.length}}
           defaultMessage="Ave Rating: {avgRating}, num of review: {count}"
         />
       </h3>
@@ -143,7 +143,7 @@ const Bookdetail = () => {
                     day="2-digit"
                   />
                   <br />
-                  <FormattedRelativeTime value={value} unit={unit} />
+                    <FormattedRelativeTime value={value} unit={unit} />
                   <br />
                 </p>
               </div>
