@@ -11,7 +11,8 @@ const App = () => {
     <div className="app">
       <select value={langContext.locale} onChange={langContext.selectLang} >
         <option value="en-US">English</option>
-        <option value="es-MX">Spanish</option>
+        <option value="es-ES">Spanish</option>
+        <option value="fr-FR">French</option>
       </select>
       <div className="app-navigation-container">
         <SimpleNavigation navigations={navigationDirective} />

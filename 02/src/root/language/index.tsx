@@ -1,43 +1,46 @@
-
 import React, {useState} from 'react'
 import {IntlProvider} from 'react-intl'
 
-import Spanish from 'translations/es-MX.json'
+import Spanish from 'translations/es-ES.json'
 import English from 'translations/en-US.json'
+import French from 'translations/fr-FR.json'
 
+type localType = 'en-US'|'es-ES'|'fr-FR'
 
-const local = 'es-MX' //navigator.language;
-// const local = navigator.language;
+const InitialLocale:localType = navigator.language || 'en-US';
 
-let lang = English
-if (local === 'es-MX') {
+type langType = typeof Spanish | typeof English | typeof French
+
+let lang:langType = English
+if (InitialLocale === 'es-ES') {
   lang = Spanish
+} else if (InitialLocale === 'fr-FR') {
+  lang = French
 }
 
 type LangContextType = {
   locale: string
-  selectLang: (e:React.ChangeEvent<HTMLSelectElement>) => void
+  selectLang: (e: React.ChangeEvent<HTMLSelectElement>) => void
 }
 
 const LangContext = React.createContext<LangContextType>({
   locale: 'es-US',
-  selectLang: ()=>undefined,
+  selectLang: () => undefined,
 })
 
 const Language = (props: {children: React.ReactNode}) => {
-  const [locale, setLocale] = useState(local)
-  const [message, setMessage] = useState(lang)
+  const [locale, setLocale] = useState<localType>(InitialLocale)
+  const [message, setMessage] = useState<langType>(lang)
 
-  function selectLang(e:React.ChangeEvent<HTMLSelectElement>) {
+  function selectLang(e: React.ChangeEvent<HTMLSelectElement>) {
     const newLocale = e.target.value
 
     setLocale(newLocale)
-    if (newLocale === 'es-MX') {
+    if (newLocale === 'es-ES') {
       setMessage(Spanish)
-    } else {
-      setMessage(English)
+    } else if (newLocale === 'fr-FR') {
+      setMessage(French)
     }
-
   }
 
   console.log('xxxx: locale:', locale)

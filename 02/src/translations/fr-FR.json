@@ -2,9 +2,9 @@
   "app.channel.plug": "Video brought to you by Coding with Chaim",
   "app.content": "Learn React",
   "app.header": "Edit <my-tag>src/App.js</my-tag> js and save to reload.",
-  "detail.author": "Author: {author}",
-  "detail.purchase": "Purchase this book from:",
-  "detail.toggle": "Toggle",
+  "detail.author": "FR Author: {author}",
+  "detail.purchase": "FR Purchase this book from:",
+  "detail.toggle": "FR Toggle",
   "pageb.channel.plug": "Video brought to you by Coding with Chaim",
   "pageb.content": "Learn React",
   "pageb.header": "Edit <my-tag>src/App.js</my-tag> js and save to reload."
