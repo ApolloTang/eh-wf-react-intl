@@ -7,7 +7,8 @@
   "detail.purchase": "ES Purchase this book from:",
   "detail.reviewsHeading": "review heading",
   "detail.toggle": "ES Toggle",
-  "detail.window": "length: {value}",
+  "detail.userRating": "{name} ES rated it: {rating} out of 5",
+  "detail.windo": "<small>ES All {numMerchants} links open in a new window.</small>",
   "pageb.channel.plug": "Video brought to you by Coding with Chaim",
   "pageb.content": "Learn React",
   "pageb.header": "Edit <my-tag>src/App.js</my-tag> js and save to reload."

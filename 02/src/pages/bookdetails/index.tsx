@@ -1,10 +1,14 @@
 import React, {useContext} from 'react'
 import {meanBy, round, sortBy} from 'lodash'
-import {FormattedMessage, FormattedNumber, FormattedTime, FormattedRelativeTime} from 'react-intl'
+import {
+  FormattedMessage,
+  FormattedNumber,
+  FormattedTime,
+  FormattedRelativeTime,
+} from 'react-intl'
 import {LangContext, LangContextType} from 'root/language/'
 import {useParams} from 'react-router-dom'
-import {selectUnit} from '@formatjs/intl-utils';
-
+import {selectUnit} from '@formatjs/intl-utils'
 
 import books from '../../books.json'
 type merchantType = {
@@ -94,9 +98,12 @@ const Bookdetail = () => {
       </div>
 
       <FormattedMessage
-        id="detail.window"
-        values={{numMerchants: book?.merchants.length}}
-        defaultMessage="number of merchants: {numMerchants}"
+        id="detail.windo"
+        values={{
+          numMerchants: book?.merchants.length,
+          small: (...chunks: string[]) => <small><em>{chunks}</em></small>,
+        }}
+        defaultMessage="<small>All {numMerchants} links open in a new window.</small>"
       />
 
       <h2>
@@ -116,7 +123,9 @@ const Bookdetail = () => {
 
       <div className="BookDetail-reviews">
         {sortedReviews.map(review => {
-          const {value, unit} = selectUnit(Date.now()- new Date(review.date).getTime());
+          const {value, unit} = selectUnit(
+            Date.now() - new Date(review.date).getTime(),
+          )
 
           return (
             <div className="Review" key={review.date}>
@@ -125,9 +134,10 @@ const Bookdetail = () => {
                 <p>
                   <FormattedMessage
                     id="detail.userRating"
+                    defaultMessage="{name} rated it: {rating} out of 5"
                     values={{
-                      name: <strong>{review.name}</strong>,
-                      rating: review.rating,
+                      name: <strong>{review?.name}</strong>,
+                      rating: review?.rating,
                     }}
                   />
                   <br />
@@ -143,7 +153,7 @@ const Bookdetail = () => {
                     day="2-digit"
                   />
                   <br />
-                    <FormattedRelativeTime value={value} unit={unit} />
+                  <FormattedRelativeTime value={value} unit={unit} />
                   <br />
                 </p>
               </div>
